@@ -25,6 +25,12 @@ export default tseslint.config(
     },
   },
   {
+    files: ['src/app/providers/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+  {
     files: ['**/*.test.{ts,tsx}'],
     languageOptions: {
       globals: {

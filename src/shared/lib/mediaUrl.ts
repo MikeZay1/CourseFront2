@@ -30,7 +30,7 @@ function publicAssetPath(relativePath: string): string {
     return path.startsWith('/') ? path : `/${path}`;
   }
 
-  let prefix = base.endsWith('/') ? base.slice(0, -1) : base;
+  const prefix = base.endsWith('/') ? base.slice(0, -1) : base;
   if (prefix === '' || prefix === '/') {
     return path.startsWith('/') ? path : `/${path}`;
   }

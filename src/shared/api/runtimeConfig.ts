@@ -18,7 +18,6 @@ export function getApiRuntime(): {
   const timeoutMs = Number(import.meta.env.VITE_API_TIMEOUT_MS || 15000);
 
   if (!useMock && !baseURL && !devProxy && import.meta.env.DEV) {
-    // eslint-disable-next-line no-console
     console.warn(
       '[api] VITE_USE_MOCK=false, но не задан VITE_API_URL и не включён VITE_DEV_PROXY. Включите прокси или URL API.',
     );
