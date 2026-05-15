@@ -20,33 +20,48 @@ const RegisterPage = lazy(() =>
   import('@/pages/RegisterPage').then((m) => ({ default: m.RegisterPage })),
 );
 
-const router = createBrowserRouter(
-  [
-    {
-      path: '/',
-      element: <MainLayout />,
-      children: [
-        { index: true, element: <HomePage /> },
-        { path: 'lessons', element: <LessonsPage /> },
-        { path: 'lessons/new', element: <ProtectedRoute><LessonFormPage /></ProtectedRoute> },
-        {
-          path: 'lessons/:lessonId/edit',
-          element: (
-            <ProtectedRoute>
-              <LessonFormPage />
-            </ProtectedRoute>
-          ),
-        },
-        { path: 'lessons/:id', element: <LessonDetailPage /> },
-        { path: 'favorites', element: <FavoritesPage /> },
-        { path: 'login', element: <LoginPage /> },
-        { path: 'register', element: <RegisterPage /> },
-        { path: '*', element: <Navigate to="/" replace /> },
-      ],
-    },
-  ],
-  { basename: import.meta.env.BASE_URL },
-);
+const routes = [
+  {
+    path: '/',
+    element: <MainLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'lessons', element: <LessonsPage /> },
+      { path: 'lessons/new', element: <ProtectedRoute><LessonFormPage /></ProtectedRoute> },
+      {
+        path: 'lessons/:lessonId/edit',
+        element: (
+          <ProtectedRoute>
+            <LessonFormPage />
+          </ProtectedRoute>
+        ),
+      },
+      { path: 'lessons/:id', element: <LessonDetailPage /> },
+      { path: 'favorites', element: <FavoritesPage /> },
+      { path: 'login', element: <LoginPage /> },
+      { path: 'register', element: <RegisterPage /> },
+      { path: '*', element: <Navigate to="/" replace /> },
+    ],
+  },
+];
+
+/**
+ * React Router: basename только с ведущим слэшем, без завершающего.
+ * На GitHub Actions ассеты собираются с base './', путь к репо задаём через VITE_ROUTER_BASENAME.
+ */
+function resolveRouterBasename(): string | undefined {
+  const explicit = import.meta.env.VITE_ROUTER_BASENAME?.trim();
+  if (explicit) {
+    const noTrail = explicit.replace(/\/+$/, '');
+    return noTrail === '' ? undefined : noTrail;
+  }
+  const base = import.meta.env.BASE_URL || '/';
+  if (base === '/' || base === './' || base.startsWith('./')) return undefined;
+  const trimmed = base.replace(/\/+$/, '');
+  return trimmed === '' ? undefined : trimmed;
+}
+
+const router = createBrowserRouter(routes, { basename: resolveRouterBasename() });
 
 export function App() {
   return (

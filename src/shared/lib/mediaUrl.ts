@@ -15,6 +15,10 @@ export function resolveLessonMediaUrl(url: string | undefined | null): string {
 
 function joinBase(path: string): string {
   const base = import.meta.env.BASE_URL || '/';
+  const cleanPath = path.replace(/^\//, '');
+  if (base === './') {
+    return `./${cleanPath}`;
+  }
   const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
-  return `${baseWithSlash}${path}`;
+  return `${baseWithSlash}${cleanPath}`;
 }

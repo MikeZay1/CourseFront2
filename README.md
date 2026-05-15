@@ -63,7 +63,7 @@ npm run build
 
 1. Репозиторий с **корнем в этой папке** (`tutoring-spa`).
 2. Settings → Pages → Build and deployment → Source: **GitHub Actions**.
-3. В CI при сборке задаётся `VITE_BASE_URL=/<имя-репозитория>/`. Локально для проверки Pages добавьте в `.env` тот же путь.
+3. В CI при сборке задаётся `VITE_ROUTER_BASENAME=/ИмяРепозитория` и относительный `base` для ассетов (см. `vite.config.ts`). Локально для проверки под Pages: `VITE_ROUTER_BASENAME=/CourseFront2 npm run build` (при `GITHUB_ACTIONS` задаётся только в CI).
 4. После `npm run build` скрипт `postbuild` копирует `index.html` в `404.html` (SPA-fallback на GitHub Pages).
 5. Поле `homepage` в `package.json` замените на URL вида `https://<user>.github.io/<repo>/`.
 
@@ -71,4 +71,6 @@ npm run build
 
 ### Белый / пустой экран на Pages
 
-Сайт project pages открывается как `https://<user>.github.io/<repo>/`, поэтому в бандле должен быть **`base: /<имя-репозитория>/`**. В `vite.config.ts` при сборке в Actions автоматически берётся путь из переменной **`GITHUB_REPOSITORY`** (и дублируется `VITE_BASE_URL` в workflow). Если страница пустая, в DevTools → Network проверьте **404 на файлы `/assets/*.js`**: значит `base` был `/` — закоммитьте актуальный `vite.config.ts` и перезапустите workflow.
+1. **Settings → Pages**: источник — **GitHub Actions**, не ветка `docs`.
+2. В CI сборка использует **`base: './'`** (относительные `assets/*.js`, чтобы не было 404 на скрипты) и **`VITE_ROUTER_BASENAME=/ИмяРепо`** для React Router — маршруты совпадают с `https://user.github.io/Repo/…`.
+3. В корне `public` есть **`.nojekyll`**, чтобы GitHub не пропускал файлы через Jekyll.

@@ -5,16 +5,17 @@ import react from '@vitejs/plugin-react';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-/** GitHub Pages: приложение живёт в /<repo>/, base должен совпадать, иначе JS/CSS 404 → белый экран. */
+/** GitHub Pages: приложение в /<repo>/ — абсолютный base ломается при несовпадении путей; в CI используем относительный base. */
 function resolveBaseUrl(mode: string): string {
+  if (process.env.GITHUB_ACTIONS === 'true') {
+    return './';
+  }
+
   const envFile = loadEnv(mode, process.cwd(), '');
   const fromShell = process.env.VITE_BASE_URL?.trim();
-  const repo = process.env.GITHUB_REPOSITORY?.split('/')?.[1];
-  const fromGithubActions =
-    process.env.GITHUB_ACTIONS === 'true' && repo ? `/${repo}/` : undefined;
   const fromFile = envFile.VITE_BASE_URL?.trim();
 
-  const raw = fromShell || fromGithubActions || fromFile || '/';
+  const raw = fromShell || fromFile || '/';
   if (raw === '/') return '/';
   return raw.endsWith('/') ? raw : `${raw}/`;
 }
