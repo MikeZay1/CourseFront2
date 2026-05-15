@@ -1,0 +1,21 @@
+.card {
+  background: #fff;
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.card_padded .card__body {
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.card__header {
+  padding: 1rem 1.1rem 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.card__body {
+  color: #334155;
+}

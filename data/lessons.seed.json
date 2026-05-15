@@ -1,0 +1,160 @@
+[
+  {
+    "id": "l1",
+    "subject": "Математика",
+    "tutor": {
+      "id": "t1",
+      "firstName": "Анна",
+      "lastName": "Смирнова",
+      "bio": "Выпускница мехмата, 10 лет опыта подготовки к ЕГЭ и олимпиадам.",
+      "avatarUrl": "placeholders/avatar-1.svg"
+    },
+    "description": "Алгебра и геометрия: от базовых тем до олимпиадного уровня. Индивидуальный план и разбор ошибок.",
+    "priceRub": 2200,
+    "durationMinutes": 60,
+    "level": "intermediate",
+    "availableSlots": [
+      { "id": "s1", "startIso": "2026-05-20T16:00:00.000Z" },
+      { "id": "s2", "startIso": "2026-05-21T10:00:00.000Z" }
+    ],
+    "reviews": [
+      {
+        "id": "r1",
+        "studentName": "Илья",
+        "rating": 5,
+        "comment": "Очень понятно объясняет, подтянул алгебру за месяц.",
+        "createdAt": "2026-04-01T12:00:00.000Z"
+      }
+    ],
+    "rating": 4.9,
+    "coverImageUrl": "placeholders/cover-1.svg",
+    "createdAt": "2026-05-01T09:00:00.000Z"
+  },
+  {
+    "id": "l2",
+    "subject": "Английский язык",
+    "tutor": {
+      "id": "t2",
+      "firstName": "Джон",
+      "lastName": "Паркер",
+      "bio": "Носитель языка, IELTS examiner.",
+      "avatarUrl": "placeholders/avatar-2.svg"
+    },
+    "description": "Разговорный английский и академический письменный стиль. Практика по темам студента.",
+    "priceRub": 3000,
+    "durationMinutes": 45,
+    "level": "advanced",
+    "availableSlots": [{ "id": "s3", "startIso": "2026-05-18T18:30:00.000Z" }],
+    "reviews": [
+      {
+        "id": "r2",
+        "studentName": "Мария",
+        "rating": 5,
+        "comment": "Отличная практика speaking, заметный прогресс.",
+        "createdAt": "2026-04-10T08:00:00.000Z"
+      }
+    ],
+    "rating": 4.8,
+    "coverImageUrl": "placeholders/cover-2.svg",
+    "createdAt": "2026-05-02T11:00:00.000Z"
+  },
+  {
+    "id": "l3",
+    "subject": "Физика",
+    "tutor": {
+      "id": "t3",
+      "firstName": "Олег",
+      "lastName": "Кузнецов",
+      "bio": "Кандидат физ.-мат. наук, преподаватель вуза.",
+      "avatarUrl": "placeholders/avatar-3.svg"
+    },
+    "description": "Механика и термодинамика. Подготовка к экзаменам и углубленное изучение.",
+    "priceRub": 1800,
+    "durationMinutes": 90,
+    "level": "beginner",
+    "availableSlots": [
+      { "id": "s4", "startIso": "2026-05-22T14:00:00.000Z" },
+      { "id": "s5", "startIso": "2026-05-23T14:00:00.000Z" }
+    ],
+    "reviews": [],
+    "rating": 4.6,
+    "coverImageUrl": "placeholders/cover-3.svg",
+    "createdAt": "2026-05-03T15:00:00.000Z"
+  },
+  {
+    "id": "l4",
+    "subject": "Программирование",
+    "tutor": {
+      "id": "t4",
+      "firstName": "Елена",
+      "lastName": "Волкова",
+      "bio": "Senior frontend, ментор по React и TypeScript.",
+      "avatarUrl": "placeholders/avatar-4.svg"
+    },
+    "description": "React, TypeScript, архитектура SPA, тестирование и code review ваших проектов.",
+    "priceRub": 3500,
+    "durationMinutes": 60,
+    "level": "intermediate",
+    "availableSlots": [{ "id": "s6", "startIso": "2026-05-19T17:00:00.000Z" }],
+    "reviews": [
+      {
+        "id": "r3",
+        "studentName": "Артём",
+        "rating": 5,
+        "comment": "Структурированные занятия и полезные материалы.",
+        "createdAt": "2026-04-20T19:00:00.000Z"
+      }
+    ],
+    "rating": 5,
+    "coverImageUrl": "placeholders/cover-4.svg",
+    "createdAt": "2026-05-04T10:30:00.000Z"
+  },
+  {
+    "id": "l5",
+    "subject": "Химия",
+    "tutor": {
+      "id": "t5",
+      "firstName": "Светлана",
+      "lastName": "Ильина",
+      "bio": "Подготовка к ЕГЭ по химии, лабораторные разборы.",
+      "avatarUrl": "placeholders/avatar-5.svg"
+    },
+    "description": "Органическая и неорганическая химия, разбор типовых задач ЕГЭ.",
+    "priceRub": 1600,
+    "durationMinutes": 60,
+    "level": "beginner",
+    "availableSlots": [],
+    "reviews": [
+      {
+        "id": "r4",
+        "studentName": "Ксения",
+        "rating": 4,
+        "comment": "Хорошие конспекты, но хотелось бы больше практики.",
+        "createdAt": "2026-03-28T16:00:00.000Z"
+      }
+    ],
+    "rating": 4.5,
+    "coverImageUrl": "placeholders/cover-5.svg",
+    "createdAt": "2026-05-05T09:00:00.000Z"
+  },
+  {
+    "id": "l6",
+    "subject": "Математика",
+    "tutor": {
+      "id": "t6",
+      "firstName": "Павел",
+      "lastName": "Новиков",
+      "bio": "Специализация: матанализ для первого курса.",
+      "avatarUrl": "placeholders/avatar-6.svg"
+    },
+    "description": "Пределы, производные, интегралы — с интуицией и задачами.",
+    "priceRub": 2000,
+    "durationMinutes": 45,
+    "level": "advanced",
+    "availableSlots": [{ "id": "s7", "startIso": "2026-05-25T12:00:00.000Z" }],
+    "reviews": [],
+    "rating": 4.7,
+    "coverImageUrl": "placeholders/cover-6.svg",
+    "createdAt": "2026-05-06T18:00:00.000Z"
+  }
+]

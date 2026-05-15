@@ -1,0 +1,133 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout__header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+  background: rgba(248, 250, 252, 0.9);
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.layout__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.layout__logo {
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.layout__tagline {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.layout__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.layout__link {
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.55rem;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.layout__link:hover {
+  background: #e2e8f0;
+}
+
+.layout__link_active {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.layout__user {
+  font-size: 0.9rem;
+  color: #0f172a;
+  padding: 0 0.35rem;
+}
+
+.layout__authLink {
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.65rem;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.layout__authLink:hover {
+  background: #f8fafc;
+}
+
+.layout__authPrimary {
+  padding: 0.55rem 0.95rem;
+  border-radius: 0.65rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #fff;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+.layout__authPrimary:hover {
+  box-shadow: 0 10px 26px rgba(37, 99, 235, 0.32);
+}
+
+.layout__main {
+  flex: 1;
+  width: min(1200px, 100% - 2rem);
+  margin: 1.25rem auto 2rem;
+  animation: pageFade 0.35s ease;
+}
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.layout__footer {
+  padding: 1rem;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  border-top: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+@media (max-width: 720px) {
+  .layout__header {
+    align-items: flex-start;
+  }
+
+  .layout__nav {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

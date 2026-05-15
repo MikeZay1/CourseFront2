@@ -1,0 +1,93 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.hero {
+  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  color: #e2e8f0;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.35);
+}
+
+.hero__title {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  margin-bottom: 0.65rem;
+}
+
+.hero__text {
+  max-width: 52ch;
+  color: #cbd5f5;
+  margin-bottom: 1rem;
+}
+
+.hero__cta {
+  display: inline-flex;
+  padding: 0.65rem 1rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section__title {
+  font-size: 1.25rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.tutors {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.tutorCard {
+  animation: cardIn 0.45s ease both;
+}
+
+.tutorRow {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.tutorAvatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid #e2e8f0;
+}
+
+.tutorBio {
+  font-size: 0.92rem;
+  color: #475569;
+}
+
+.muted {
+  color: #64748b;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

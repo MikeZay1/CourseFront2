@@ -1,0 +1,150 @@
+.lessonCard {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  animation: cardIn 0.55s ease both;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lessonCard__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.9rem 1rem 1rem;
+}
+
+/* Блок на месте бывшего превью: заголовок предмета + уровень */
+.lessonCard__lead {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.lessonCard__lead:hover .lessonCard__subject {
+  color: #1d4ed8;
+}
+
+.lessonCard__subject {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+  transition: color 0.15s ease;
+}
+
+.lessonCard__level {
+  margin: 0.4rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #475569;
+  letter-spacing: 0.01em;
+}
+
+.lessonCard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.lessonCard__tutor {
+  margin: 0;
+  min-width: 0;
+  flex: 1;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.lessonCard__desc {
+  color: #475569;
+  font-size: 0.92rem;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lessonCard__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lessonCard__price {
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.lessonCard__meta {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.lessonCard__rating {
+  font-weight: 700;
+  color: #ca8a04;
+}
+
+.lessonCard__cta {
+  margin-top: 0.25rem;
+}
+
+.lessonCard__linkBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1rem;
+  border-radius: 0.65rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid #1e293b;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.lessonCard__linkBtn:hover {
+  background: #111827;
+}
+
+.lessonCard__linkBtn:active {
+  transform: translateY(1px);
+}
+
+.lessonCard__fav {
+  display: flex;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.lessonCard__favBtn {
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 0.55rem;
+  padding: 0.25rem 0.45rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.lessonCard__favBtn[aria-pressed='true'] {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
