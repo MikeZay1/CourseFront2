@@ -37,6 +37,7 @@ jobs:
 
       - name: Build
         env:
+          # Дублируем base; в vite.config.ts также берётся из GITHUB_REPOSITORY (страховка от белого экрана на Pages)
           VITE_BASE_URL: /${{ github.event.repository.name }}/
           VITE_USE_MOCK: 'true'
         run: npm run build

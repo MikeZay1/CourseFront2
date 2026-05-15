@@ -68,3 +68,7 @@ npm run build
 5. Поле `homepage` в `package.json` замените на URL вида `https://<user>.github.io/<repo>/`.
 
 На Pages сборка идёт с моком в браузере (`VITE_USE_MOCK=true` в workflow), отдельный Node API туда не деплоится.
+
+### Белый / пустой экран на Pages
+
+Сайт project pages открывается как `https://<user>.github.io/<repo>/`, поэтому в бандле должен быть **`base: /<имя-репозитория>/`**. В `vite.config.ts` при сборке в Actions автоматически берётся путь из переменной **`GITHUB_REPOSITORY`** (и дублируется `VITE_BASE_URL` в workflow). Если страница пустая, в DevTools → Network проверьте **404 на файлы `/assets/*.js`**: значит `base` был `/` — закоммитьте актуальный `vite.config.ts` и перезапустите workflow.
