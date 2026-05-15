@@ -6,7 +6,7 @@ export interface SpinnerProps extends BaseUiProps {
 }
 
 export class Spinner extends BaseUiComponent<SpinnerProps> {
-  static override displayName = 'Spinner';
+  static displayName = 'Spinner';
 
   override render() {
     const { label = 'Загрузка…', className } = this.props;

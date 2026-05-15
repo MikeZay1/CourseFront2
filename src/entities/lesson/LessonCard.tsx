@@ -12,7 +12,7 @@ export interface LessonCardProps extends BaseUiProps {
 }
 
 class LessonCardView extends BaseUiComponent<LessonCardProps> {
-  static override displayName = 'LessonCardView';
+  static displayName = 'LessonCardView';
 
   override render() {
     const { lesson, className, styleIndex = 0 } = this.props;

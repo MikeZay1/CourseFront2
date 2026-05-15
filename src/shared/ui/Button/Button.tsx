@@ -11,7 +11,7 @@ export interface ButtonProps extends BaseUiProps {
 }
 
 export class Button extends BaseUiComponent<ButtonProps> {
-  static override displayName = 'Button';
+  static displayName = 'Button';
 
   override render() {
     const { children, className, variant = 'primary', type = 'button', disabled, onClick, ...rest } =

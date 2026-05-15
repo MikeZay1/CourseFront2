@@ -7,11 +7,15 @@ export interface CardProps extends BaseUiProps {
 }
 
 export class Card extends BaseUiComponent<CardProps> {
-  static override displayName = 'Card';
+  static displayName = 'Card';
 
   override render() {
     const { title, children, className, padded = true } = this.props;
-    const root = this.mergeClassNames(styles.card, padded && styles.card_padded, className);
+    const root = this.mergeClassNames(
+      styles.card,
+      padded ? styles.card_padded : undefined,
+      className,
+    );
     return (
       <section className={root}>
         {title ? <header className={styles.card__header}>{title}</header> : null}

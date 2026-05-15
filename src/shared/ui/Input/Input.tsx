@@ -15,7 +15,7 @@ export interface InputProps extends BaseUiProps {
 }
 
 export class Input extends BaseUiComponent<InputProps> {
-  static override displayName = 'Input';
+  static displayName = 'Input';
 
   override render() {
     const {
