@@ -1,24 +1,38 @@
 /**
- * Обложки и аватары из `public/placeholders/` (без внешних CDN).
- * Относительные пути дополняются `import.meta.env.BASE_URL` для GitHub Pages.
+ * Публичные файлы из `public/` (лежат в корне деплоя).
+ *
+ * При Vite `base: './'` относительный `<img src="./placeholders/...">` на вложенных маршрутах
+ * резолвится от pathname (например /Repo/lessons/id → /Repo/lessons/placeholders/... — 404).
+ * Для GitHub Pages задаём абсолютный префикс `VITE_ROUTER_BASENAME` (= /Repo без слэша в конце).
  */
 export function resolveLessonMediaUrl(url: string | undefined | null): string {
   if (!url || !url.trim()) {
-    return joinBase('placeholders/cover-default.svg');
+    return publicAssetPath('placeholders/cover-default.svg');
   }
   const u = url.trim();
   if (/^https?:\/\//i.test(u)) {
     return u;
   }
-  return joinBase(u.replace(/^\//, ''));
+  return publicAssetPath(u.replace(/^\//, ''));
 }
 
-function joinBase(path: string): string {
-  const base = import.meta.env.BASE_URL || '/';
-  const cleanPath = path.replace(/^\//, '');
-  if (base === './') {
-    return `./${cleanPath}`;
+function publicAssetPath(relativePath: string): string {
+  const path = relativePath.replace(/^\//, '').replace(/\/+/g, '/');
+
+  const repoBase = import.meta.env.VITE_ROUTER_BASENAME?.trim();
+  if (repoBase) {
+    const prefix = (repoBase.startsWith('/') ? repoBase : `/${repoBase}`).replace(/\/+$/, '');
+    return `${prefix}/${path}`;
   }
-  const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
-  return `${baseWithSlash}${cleanPath}`;
+
+  const base = import.meta.env.BASE_URL || '/';
+  if (base === './') {
+    return path.startsWith('/') ? path : `/${path}`;
+  }
+
+  let prefix = base.endsWith('/') ? base.slice(0, -1) : base;
+  if (prefix === '' || prefix === '/') {
+    return path.startsWith('/') ? path : `/${path}`;
+  }
+  return `${prefix}/${path}`.replace(/\/+/g, '/');
 }
