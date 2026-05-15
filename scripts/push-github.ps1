@@ -1,53 +1,70 @@
+# Пуш в https://github.com/MikeZay1/CourseFront2
+# Запуск: powershell -ExecutionPolicy Bypass -File .\scripts\push-github.ps1
+
 $ErrorActionPreference = "Continue"
-$log = Join-Path $PSScriptRoot "..\push-log.txt"
-$root = Resolve-Path (Join-Path $PSScriptRoot "..")
+Set-Location (Resolve-Path (Join-Path $PSScriptRoot ".."))
 
-function Log($msg) {
-  $line = "[$(Get-Date -Format 'HH:mm:ss')] $msg"
-  Add-Content -Path $log -Value $line
-  Write-Host $line
+Write-Host "=== TutorSpace -> CourseFront2 ===" -ForegroundColor Cyan
+
+if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
+  Write-Host "Git не найден. Установите Git for Windows." -ForegroundColor Red
+  exit 1
 }
-
-Set-Location $root
-"" | Set-Content $log
-
-Log "cwd: $root"
 
 if (-not (Test-Path .git)) {
-  git init 2>&1 | ForEach-Object { Log $_ }
+  git init
+  git branch -M main
 }
 
-$branch = git branch --show-current 2>&1
-Log "branch before: $branch"
-if (-not $branch -or $branch -match "fatal") {
-  git checkout -b main 2>&1 | ForEach-Object { Log $_ }
-}
-if ((git branch --show-current) -eq "master") {
-  git branch -M main 2>&1 | ForEach-Object { Log $_ }
-}
-
-$remotes = git remote 2>&1
-if ($remotes -notcontains "origin") {
-  git remote add origin https://github.com/MikeZay1/CourseFront2.git 2>&1 | ForEach-Object { Log $_ }
+$remoteUrl = "https://github.com/MikeZay1/CourseFront2.git"
+if ((git remote) -contains "origin") {
+  git remote set-url origin $remoteUrl
 } else {
-  git remote set-url origin https://github.com/MikeZay1/CourseFront2.git 2>&1 | ForEach-Object { Log $_ }
-}
-git remote -v 2>&1 | ForEach-Object { Log $_ }
-
-git add -A 2>&1 | ForEach-Object { Log $_ }
-$porcelain = git status --porcelain 2>&1
-Log "status: $porcelain"
-if ($porcelain) {
-  git commit -m "Initial commit: TutorSpace SPA (React, TypeScript, API integration)" 2>&1 | ForEach-Object { Log $_ }
+  git remote add origin $remoteUrl
 }
 
-git fetch origin main 2>&1 | ForEach-Object { Log $_ }
-$hasMain = git ls-remote --heads origin main 2>&1
-Log "remote main: $hasMain"
-if ($hasMain -and $hasMain -notmatch "fatal") {
-  git pull --rebase origin main 2>&1 | ForEach-Object { Log $_ }
+# gh — самый простой способ обойти 403 на Windows
+if (Get-Command gh -ErrorAction SilentlyContinue) {
+  $auth = gh auth status 2>&1
+  if ($LASTEXITCODE -ne 0) {
+    Write-Host "Войдите в GitHub (исправляет 403):" -ForegroundColor Yellow
+    gh auth login
+  }
+  gh auth setup-git 2>&1 | Out-Null
+} else {
+  Write-Host "Рекомендуется: winget install GitHub.cli  затем gh auth login" -ForegroundColor Yellow
+  Write-Host "Или PAT: https://github.com/settings/tokens (scope: repo)" -ForegroundColor Yellow
 }
 
-git push -u origin main 2>&1 | ForEach-Object { Log $_ }
-Log "exit push: $LASTEXITCODE"
-Log "DONE"
+git add -A
+$dirty = git status --porcelain
+if ($dirty) {
+  git commit -m "Update: API integration, local media, lesson cards without cover images"
+  if ($LASTEXITCODE -ne 0) {
+    Write-Host "Ошибка commit. Проверьте: git config user.name и user.email" -ForegroundColor Red
+    exit 1
+  }
+} else {
+  Write-Host "Нет новых изменений для commit." -ForegroundColor Gray
+}
+
+$hasRemoteMain = $false
+try {
+  git ls-remote --heads origin main 2>$null | Out-Null
+  if ($LASTEXITCODE -eq 0) { $hasRemoteMain = $true }
+} catch { }
+
+if ($hasRemoteMain) {
+  git pull --rebase origin main
+}
+
+Write-Host "Отправка на origin main..." -ForegroundColor Cyan
+git push -u origin main
+
+if ($LASTEXITCODE -eq 0) {
+  Write-Host "Готово: https://github.com/MikeZay1/CourseFront2" -ForegroundColor Green
+} else {
+  Write-Host "Push не удался. Частая причина — 403: неверный токен в Credential Manager." -ForegroundColor Red
+  Write-Host "Удалите git:https://github.com в Диспетчере учётных данных и повторите gh auth login" -ForegroundColor Yellow
+  exit 1
+}
